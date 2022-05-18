@@ -14,20 +14,18 @@ function validate(field, label){
       setTimeout(() => setStatus(''),3000);
       return false;
     }     
-    return true;
+      return true;
 }
 
 function handleCreate(){
-  if (!validate(quantity, 'withdrawal amount')) return;
+  if (!validate(quantity, 'withdrawal amount')) 
+            return;
   if (isNaN(quantity)) {
     alert(`Must be a number`);
-            return;
-  }
-  
+            return;}
   if (quantity <= 0) {
     alert(`Cannot be a negative number`);
-            return;
-  }
+            return;}
   
   setShow(false);
   var balance = quantityDeposited();
@@ -41,7 +39,7 @@ function handleCreate(){
   let email = ctx.users[length].email;
   let password = ctx.users[length].password;
 
-  ctx.users.push({name,email,password,balance, amountWithdrawn, deposit});
+  ctx.users.push({name,email,password,balance,amountWithdrawn,deposit});
 }    
 
 function quantityDeposited() {
@@ -73,16 +71,29 @@ function updateAccount() {
       header="Withdrawal"
       status={status}
       body={show ? (  
-              <>              
-              How much would you like to withdraw? {ctx.users.balance}<br/><br/>           
+              <>
+              {ctx.users[length].name}, <br/><br/>              
+              How much would you like to withdraw? <br/><br/>  
+              Your balance is: {ctx.users.balance}<br/><br/>           
               Withdraw<br/>
-              <input type="input" className="form-control" id="name" placeholder="Enter amount" value={quantity} onChange={e => setDeposit(e.currentTarget.value)} /><br/>
-              <button type="submit" className="btn btn-light" onClick={handleCreate} disabled={!quantity}>Confirm Withdrawal</button>
+              <input type="input" 
+                className="form-control" 
+                id="name" 
+                placeholder="Enter amount" 
+                value={quantity} 
+                onChange={e => setDeposit(e.currentTarget.value)} /><br/>
+
+              <button type="submit" 
+                className="btn btn-light" 
+                onClick={handleCreate} 
+                disabled={!quantity}>Confirm Withdrawal</button>
               </>
             ):(
               <>               
               {!status && (<h5>Success</h5>)}
-              <button type="submit" className="btn btn-light" onClick={clearForm}>Add another withdrawal operation</button>
+              <button type="submit" 
+                className="btn btn-light" 
+                onClick={clearForm}>Would You like to withdraw more?</button>
               </>
             )}
     />

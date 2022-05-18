@@ -28,7 +28,7 @@ function Deposit(){
       setTimeout(() => setStatus(''),3000);
       return false;
     }     
-    return true;
+      return true;
 }
   
   setShow(false);
@@ -40,7 +40,7 @@ function Deposit(){
     let name = ctx.users[length].name;
     let email = ctx.users[length].email;
     let password = ctx.users[length].password;
-    ctx.users.push({name,email,password,balance, quantity, withdrawalAmount});
+    ctx.users.push({name,email,password,balance,quantity,withdrawalAmount});
 }    
 
 function updateAccount() {
@@ -72,18 +72,30 @@ function clearForm(){
       body={show ? (  
               <>
               {ctx.users[length].name},<br/><br/>                            
-              How much would you like to deposit? {ctx.users.balance}<br/><br/>
+              How much would you like to deposit?<br/><br/>
+              Your balance is: {ctx.users.balance}<br/><br/>
               Deposit<br/>
-              <input type="input" className="form-control" id="name" placeholder="Enter amount" value={quantity} onChange={e => setDeposit(e.currentTarget.value)} /><br/>
-              <button type="submit" className="btn btn-light" onClick={handleCreate} disabled={!quantity}>Confirm Deposit</button>
+              <input type="input" 
+                className="form-control" 
+                id="name" 
+                placeholder="Enter amount" 
+                value={quantity} 
+                onChange={e => setDeposit(e.currentTarget.value)} /><br/>
+
+              <button type="submit" 
+                className="btn btn-light" 
+                onClick={handleCreate} 
+                disabled={!quantity}>Confirm Deposit</button>
               </>
             ):(
               <>
               <h5>Success</h5>              
-              <button type="submit" className="btn btn-light" onClick={clearForm}>Add another deposit</button>
+              <button type="submit" 
+                className="btn btn-light" 
+                onClick={clearForm}>Would you like to deposit more?</button>
               </>
             )}
-      depositTotal = {total}
+              depositTotal = {total}
     />
   )
 }
