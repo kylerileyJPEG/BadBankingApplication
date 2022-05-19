@@ -9,20 +9,6 @@ function Deposit(){
   const ctx = React.useContext(UserContext);  
   var length = ctx.users.length -1;
 
-
-  function handleCreate(){
-    if (!validate(quantity, 'deposit amount')) 
-      return;
-    if (isNaN(quantity)) {
-    alert(`Must be a number`);
-      return;
-  }
-  
-  if (quantity <= 0) {
-    alert(`Must be a positive number`);
-      return;
-  }
-
   function validate(field, label){
     if (!field) {
       setTimeout(() => setStatus(''),3000);
@@ -30,17 +16,22 @@ function Deposit(){
     }     
       return true;
 }
+
+function handleCreate(){
+  if (isNaN(quantity)) {
+    alert(`Must be a number`);
+            return;}
+  if (quantity <= 0) {
+    alert(`Cannot be a negative number`);
+            return;}
   
   setShow(false);
-    var balance = deposited(); 
+    var balance = deposited();
     ctx.users.balance = balance; 
-    let withdrawalAmount = "0";
-  
-  updateAccount();
     let name = ctx.users[length].name;
     let email = ctx.users[length].email;
     let password = ctx.users[length].password;
-    ctx.users.push({name,email,password,balance,quantity,withdrawalAmount});
+    ctx.users.push({name,email,password,balance,quantity});
 }    
 
 function updateAccount() {

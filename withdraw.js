@@ -6,11 +6,11 @@ function Withdraw(){
   const [password, setPassword] = React.useState('');
   const [quantity, setDeposit] = React.useState(0);
   const [total, setTotal] = React.useState(0);
-  const ctx = React.useContext(UserContext);  
+  const ctx = React.useContext(UserContext);
+  var length = ctx.users.length -1;  
 
 function validate(field, label){
     if (!field) {
-      setStatus('Error: ' + label + ' empty field');
       setTimeout(() => setStatus(''),3000);
       return false;
     }     
@@ -18,8 +18,6 @@ function validate(field, label){
 }
 
 function handleCreate(){
-  if (!validate(quantity, 'withdrawal amount')) 
-            return;
   if (isNaN(quantity)) {
     alert(`Must be a number`);
             return;}
@@ -28,18 +26,13 @@ function handleCreate(){
             return;}
   
   setShow(false);
-  var balance = quantityDeposited();
-  setTotal(balance);
-
-  ctx.users.balance = balance;
-  let amountWithdrawn = quantity;
-  let deposit = "0";
-  var length = ctx.users.length -1;
-  let name = ctx.users[length].name;
-  let email = ctx.users[length].email;
-  let password = ctx.users[length].password;
-
-  ctx.users.push({name,email,password,balance,amountWithdrawn,deposit});
+    var balance = quantityDeposited();
+    ctx.users.balance = balance;
+    let amountWithdrawn = quantity;
+    let name = ctx.users[length].name;
+    let email = ctx.users[length].email;
+    let password = ctx.users[length].password;
+    ctx.users.push({name,email,password,balance,amountWithdrawn});
 }    
 
 function quantityDeposited() {
